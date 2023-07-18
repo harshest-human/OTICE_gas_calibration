@@ -44,15 +44,15 @@ for (file in csv_files) {
   
   data <- read.table(file, header = TRUE, sep = delimiter)  # Adjust the sep parameter based on the delimiter
   
-  # Select specific columns by index and rename column 1 to "Datetime"
+  # Select specific columns by index and rename column 1 to "DateTime"
   selected_data <- data[, c(1, 2, 3, 4, 6, 10, 13)]
-  colnames(selected_data)[1] <- "Datetime"
+  colnames(selected_data)[1] <- "DateTime"
   
-  # Remove decimal points from seconds in the "Datetime" column
-  selected_data$Datetime <- sub("\\.\\d+", "", selected_data$Datetime)
+  # Remove decimal points from seconds in the "DateTime" column
+  selected_data$DateTime <- sub("\\.\\d+", "", selected_data$DateTime)
   
-  # Change the datetime format to "DD/MM/YYYY HH:MM:SS"
-  selected_data$Datetime <- format(as.POSIXct(selected_data$Datetime), format = "%d/%m/%Y %H:%M:%S")
+  # Change the DateTime format to "DD/MM/YYYY HH:MM:SS"
+  selected_data$DateTime <- format(as.POSIXct(selected_data$DateTime), format = "%d/%m/%Y %H:%M:%S")
   
   OTICE_data <- rbind(OTICE_data, selected_data)
 }
@@ -61,22 +61,20 @@ for (file in csv_files) {
 write.csv(OTICE_data, file = "OTICE_data.csv", row.names = FALSE)
 
 
+########### DATA VISUALIZATION ###############
+#FTIR
+FTIR_1 <- FTIR_data %>% 
+  filter(DateTime >= "12/07/2023 16:02:22",
+         DateTime <= "13/07/2023 16:02:22") %>% na.omit()
+
+ggline(FTIR_1, x="DateTime", y="CH4")
 
 
+#OTICE
+OTICE_1 <- OTICE_data %>% 
+  filter(DateTime >= "12/07/2023 16:02:22",
+         DateTime <= "13/07/2023 16:02:22") %>% na.omit()
 
+OTICE_1$CH4_ppm <- 67.652 * OTICE_1$CH4^(-0.518)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ggline(OTICE_1, x="DateTime", y="CH4_ppm")
