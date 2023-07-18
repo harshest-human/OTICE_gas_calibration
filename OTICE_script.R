@@ -16,44 +16,67 @@ library(purrr)
 ########### FTIR DATA ###############
 #First manually remove unwanted columns from data in excel and check the starting point of data logging
 #Import data
-FTIR <- read.table(paste0("2023_FTIR_data/20230203.TXT"), header = T, fill = TRUE) %>%
+FTIR_data <- read.table(paste0("2023_FTIR_data/20230203.TXT"), header = T, fill = TRUE) %>%
   mutate(DateTime = paste(Datum, Zeit)) %>%
   select(-c(Datum, Zeit)) %>%
   relocate(DateTime)
 
 
-FTIR$CO2 <- as.numeric(FTIR$CO2)
-FTIR$NH3 <- as.numeric(FTIR$NH3) 
-FTIR$CH4 <- as.numeric(FTIR$CH4) 
-FTIR$Messstelle <- as.numeric(FTIR$Messstelle)
+FTIR_data$CO2 <- as.numeric(FTIR_data$CO2)
+FTIR_data$NH3 <- as.numeric(FTIR_data$NH3) 
+FTIR_data$CH4 <- as.numeric(FTIR_data$CH4) 
+FTIR_data$Messstelle <- as.numeric(FTIR_data$Messstelle)
 
 
 ########### OTICE DATA ###############
-# MERGE all csv data log files 
-# Set the folder path
-folder_path <- "2023_OTICE_data"
+# Create an empty data frame
+OTICE_data <- data.frame()
 
-# List all CSV files in the folder
-file_list <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
+# Define the directory path where the CSV files are located
+directory <- "D:/Data Analysis/OTICE_gas_calibration/2023_OTICE_data"
 
-# Read and merge CSV files
-data <- purrr::map_dfr(file_list, read_csv)
+# Get a list of CSV files in the directory
+csv_files <- list.files(path = directory, pattern = "\\.csv$", full.names = TRUE)
 
-# Output file path for the merged data
-output_file <- file.path(folder_path, "merged_data.csv")
+# Iterate over each CSV file, read its contents, and append to the OTICE_data data frame
+for (file in csv_files) {
+  delimiter <- ifelse(grepl(";", readLines(file, n = 1)), ";", "\t")  # Determine the delimiter based on the first line of each file
+  
+  data <- read.table(file, header = TRUE, sep = delimiter)  # Adjust the sep parameter based on the delimiter
+  
+  # Select specific columns by index and rename column 1 to "Datetime"
+  selected_data <- data[, c(1, 2, 3, 4, 6, 10, 13)]
+  colnames(selected_data)[1] <- "Datetime"
+  
+  # Remove decimal points from seconds in the "Datetime" column
+  selected_data$Datetime <- sub("\\.\\d+", "", selected_data$Datetime)
+  
+  # Change the datetime format to "DD/MM/YYYY HH:MM:SS"
+  selected_data$Datetime <- format(as.POSIXct(selected_data$Datetime), format = "%d/%m/%Y %H:%M:%S")
+  
+  OTICE_data <- rbind(OTICE_data, selected_data)
+}
 
-# Write the merged data to a CSV file
-write_csv(data, output_file)
-
-# Print a success message
-cat("Merged data saved to:", output_file)
-
-###### OTICE Import data ######
-OTICE <- read.csv("2023_OTICE_data/merged_data.csv")%>%
-  select()
+# Save the combined data to a new CSV file
+write.csv(OTICE_data, file = "OTICE_data.csv", row.names = FALSE)
 
 
-x <- 100# Example input value
-y <- 67.652*x^(-0.518)  # Calculating the output value using the equation
 
-print(y)  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
