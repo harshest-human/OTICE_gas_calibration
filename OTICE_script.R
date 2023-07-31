@@ -81,6 +81,25 @@ OTICE_1 <- OTICE_data %>%
   filter(DateTime >= "14/07/2023 14:02:22",
          DateTime <= "14/07/2023 14:22:22") %>% na.omit()
 
-OTICE_1$CH4_ppm <- 67.652 * OTICE_1$CH4^(-0.518)
+OTICE_1$CH4_ppm <- 0.5471 * OTICE_1$CH4^(-0.463)
+OTICE_1$NH3_ppm <- 67.652 * OTICE_1$NH3^(-0.518)
 
-ggline(OTICE_1, x="DateTime", y="CH4")
+ggline(OTICE_1, x="DateTime", y="CH4_ppm")
+ggline(OTICE_1, x="DateTime", y="NH3_ppm")
+
+
+
+
+y = 0.5471*x^(-0.463)
+y
+
+x = 5.2675
+y <- 67.652*x^(-0.518)
+y
+y = 10.232
+x = (67.652/y)^(-0.518)
+x
+
+y = 10.232
+x = (67.652 / y)^(2.161)
+x
