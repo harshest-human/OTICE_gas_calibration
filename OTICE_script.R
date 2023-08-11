@@ -73,6 +73,8 @@ FTIR_1 <- FTIR_data %>%
   filter(DateTime >= "14/07/2023 14:02:22",
          DateTime <= "14/07/2023 14:22:22") %>% na.omit()
 
+write.csv(FTIR_1, file = "FTIR_1.csv", row.names = FALSE)
+
 ggline(FTIR_1, x="DateTime", y="CH4")
 
 
@@ -81,13 +83,26 @@ OTICE_1 <- OTICE_data %>%
   filter(DateTime >= "14/07/2023 14:02:22",
          DateTime <= "14/07/2023 14:22:22") %>% na.omit()
 
+write.csv(OTICE_1, file = "OTICE_1.csv", row.names = FALSE)
+
 OTICE_1$CH4_ppm <- 0.5471 * OTICE_1$CH4^(-0.463)
 OTICE_1$NH3_ppm <- 67.652 * OTICE_1$NH3^(-0.518)
+
+
 
 ggline(OTICE_1, x="DateTime", y="CH4_ppm")
 ggline(OTICE_1, x="DateTime", y="NH3_ppm")
 
+# Convert DateTime columns to POSIXct
+#FTIR_1$DateTime <- as.POSIXct(FTIR_1$DateTime, format = "%d/%m/%Y %H:%M:%S")
+#OTICE_1$DateTime <- as.POSIXct(OTICE_1$DateTime, format = "%d/%m/%Y %H:%M:%S")
 
+# Round DateTime to the nearest minute
+#FTIR_1$DateTime <- round_date(FTIR_1$DateTime, "minute")
+#OTICE_1$DateTime <- round_date(OTICE_1$DateTime, "minute")
+
+# Merge data frames by DateTime
+#merged_data <- merge(FTIR_1, OTICE_1, by = "DateTime", all = TRUE)
 
 
 y = 0.5471*x^(-0.463)
