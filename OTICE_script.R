@@ -16,17 +16,15 @@ library(purrr)
 ########### FTIR DATA ###############
 #First manually remove unwanted columns from data in excel and check the starting point of data logging
 #Import data
-FTIR_data <- read.table(paste0("2023_FTIR_data/20230203.TXT"), header = T, fill = TRUE) %>%
-  mutate(DateTime = paste(Datum, Zeit)) %>%
+FTIR_data <- read.csv(("2023_FTIR_data/20230203.CSV"), header = T, fill = TRUE) %>%
+  mutate(DateTime = as.POSIXct(paste(Datum, Zeit), format = "%m/%d/%Y %H:%M:%S")) %>%
+  mutate(CO2 = as.numeric(CO2),
+    NH3 = as.numeric(NH3),
+    CH4 = as.numeric(CH4),
+    H2O = as.numeric(H2O),
+    Messstelle = as.numeric(Messstelle)) %>%
   select(-c(Datum, Zeit)) %>%
   relocate(DateTime)
-
-
-FTIR_data$CO2 <- as.numeric(FTIR_data$CO2)
-FTIR_data$NH3 <- as.numeric(FTIR_data$NH3) 
-FTIR_data$CH4 <- as.numeric(FTIR_data$CH4) 
-FTIR_data$Messstelle <- as.numeric(FTIR_data$Messstelle)
-
 
 ########### OTICE DATA ###############
 # Create an empty data frame
