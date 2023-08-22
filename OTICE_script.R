@@ -20,7 +20,7 @@ library(data.table)
 OTICE_data <- data.frame()
 
 # Define the directory path where the CSV files are located
-directory <- "D:/Data Analysis/OTICE_gas_calibration/2023_OTICE_data"
+directory <- "D:/Data Analysis/OTICE_gas_calibration/Raw_data/OTICE_data"
 
 # Get a list of CSV files in the directory
 csv_files <- list.files(path = directory, pattern = "\\.csv$", full.names = TRUE)
