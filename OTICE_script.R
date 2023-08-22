@@ -12,19 +12,8 @@ library(readr)
 library(vroom)
 library(lubridate)
 library(purrr)
+library(data.table)
 
-########### FTIR DATA ###############
-#First manually remove unwanted columns from data in excel and check the starting point of data logging
-#Import data
-FTIR_data <- read.csv(("2023_FTIR_data/20230203.CSV"), header = T, fill = TRUE) %>%
-  mutate(DateTime = as.POSIXct(paste(Datum, Zeit), format = "%m/%d/%Y %H:%M:%S")) %>%
-  mutate(CO2 = as.numeric(CO2),
-    NH3 = as.numeric(NH3),
-    CH4 = as.numeric(CH4),
-    H2O = as.numeric(H2O),
-    Messstelle = as.numeric(Messstelle)) %>%
-  select(-c(Datum, Zeit)) %>%
-  relocate(DateTime)
 
 ########### OTICE DATA ###############
 # Create an empty data frame
@@ -55,9 +44,7 @@ for (file in csv_files) {
   # Adjust the time by adding 2 hours (120 minutes)
   selected_data$DateTime <- selected_data$DateTime + minutes(120)
   
-  # Change the DateTime format to "DD/MM/YYYY HH:MM:SS"
-  selected_data$DateTime <- format(selected_data$DateTime, format = "%d/%m/%Y %H:%M:%S")
-  
+  # Make the final data frame
   OTICE_data <- rbind(OTICE_data, selected_data)
 }
 
