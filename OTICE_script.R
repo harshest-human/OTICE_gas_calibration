@@ -13,47 +13,33 @@ library(vroom)
 library(lubridate)
 library(purrr)
 library(data.table)
+source("https://raw.githubusercontent.com/harshest-human/GCDP/main/GCDP_function_script.R")
+
+########### OTICE DATA IMPORT ###############
+ODP(raw_path="D:/Data Analysis/Gas_data/Raw_data/OTICE_raw",
+    clean_path="D:/Data Analysis/Gas_data/Clean_data/OTICE_clean")
+
+OTICE_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/OTICE_clean/20230822_ODP.CSV")
 
 
-########### OTICE DATA ###############
-# Create an empty data frame
-OTICE_data <- data.frame()
+########### FTIR DATA IMPORT ###############
+FDP(raw_path="D:/Data Analysis/Gas_data/Raw_data/FTIR_raw/20230203_FTIR.TXT",
+    clean_path="D:/Data Analysis/Gas_data/Clean_data/FTIR_clean")
 
-# Define the directory path where the CSV files are located
-directory <- "D:/Data Analysis/Raw_data/OTICE_data"
+FTIR_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/FTIR_clean/20230822_FDP.CSV")
 
-# Get a list of CSV files in the directory
-csv_files <- list.files(path = directory, pattern = "\\.csv$", full.names = TRUE)
+# Convert DateTime columns to POSIXct
+#FTIR_1$DateTime <- as.POSIXct(FTIR_1$DateTime, format = "%d/%m/%Y %H:%M:%S")
+#OTICE_1$DateTime <- as.POSIXct(OTICE_1$DateTime, format = "%d/%m/%Y %H:%M:%S")
 
-# Iterate over each CSV file, read its contents, and append to the OTICE_data data frame
-for (file in csv_files) {
-  delimiter <- ifelse(grepl(";", readLines(file, n = 1)), ";", "\t")  # Determine the delimiter based on the first line of each file
-  
-  data <- read.table(file, header = TRUE, sep = delimiter)  # Adjust the sep parameter based on the delimiter
-  
-  # Select specific columns by index and rename column 1 to "DateTime"
-  selected_data <- data[, c(1, 2, 3, 4, 6, 10, 13)]
-  colnames(selected_data)[1] <- "DateTime"
-  
-  # Remove decimal points from seconds in the "DateTime" column
-  selected_data$DateTime <- sub("\\.\\d+", "", selected_data$DateTime)
-  
-  # Convert the "DateTime" column to a POSIXct object
-  selected_data$DateTime <- as.POSIXct(selected_data$DateTime, format = "%Y-%m-%d %H:%M:%S")
-  
-  # Adjust the time by adding 2 hours (120 minutes)
-  selected_data$DateTime <- selected_data$DateTime + minutes(120)
-  
-  # Make the final data frame
-  OTICE_data <- rbind(OTICE_data, selected_data)
-}
+# Round DateTime to the nearest minute
+#FTIR_1$DateTime <- round_date(FTIR_1$DateTime, "minute")
+#OTICE_1$DateTime <- round_date(OTICE_1$DateTime, "minute")
 
-# Save the combined data to a new CSV file
-write.csv(OTICE_data, file = "OTICE_data.csv", row.names = FALSE)
-
+# Merge data frames by DateTime
+#merged_data <- merge(FTIR_1, OTICE_1, by = "DateTime", all = TRUE)
 
 ########### DATA VISUALIZATION ###############
-#FTIR
 FTIR_1 <- FTIR_data %>% 
   filter(DateTime >= "14/07/2023 14:02:22",
          DateTime <= "14/07/2023 14:22:22") %>% na.omit()
@@ -77,18 +63,6 @@ OTICE_1$NH3_ppm <- 67.652 * OTICE_1$NH3^(-0.518)
 
 ggline(OTICE_1, x="DateTime", y="CH4_ppm")
 ggline(OTICE_1, x="DateTime", y="NH3_ppm")
-
-# Convert DateTime columns to POSIXct
-#FTIR_1$DateTime <- as.POSIXct(FTIR_1$DateTime, format = "%d/%m/%Y %H:%M:%S")
-#OTICE_1$DateTime <- as.POSIXct(OTICE_1$DateTime, format = "%d/%m/%Y %H:%M:%S")
-
-# Round DateTime to the nearest minute
-#FTIR_1$DateTime <- round_date(FTIR_1$DateTime, "minute")
-#OTICE_1$DateTime <- round_date(OTICE_1$DateTime, "minute")
-
-# Merge data frames by DateTime
-#merged_data <- merge(FTIR_1, OTICE_1, by = "DateTime", all = TRUE)
-
 
 y = 0.5471*x^(-0.463)
 y
