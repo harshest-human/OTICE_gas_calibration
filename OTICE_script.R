@@ -19,42 +19,30 @@ source("https://raw.githubusercontent.com/harshest-human/GCDP/main/GCDP_function
 ODP(raw_path="D:/Data Analysis/Gas_data/Raw_data/OTICE_raw",
     clean_path="D:/Data Analysis/Gas_data/Clean_data/OTICE_clean")
 
-OTICE_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/OTICE_clean/20230822_ODP.CSV")
+OTICE_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/OTICE_clean/20230830_ODP.CSV")
 
 
 ########### FTIR DATA IMPORT ###############
-FDP(raw_path="D:/Data Analysis/Gas_data/Raw_data/FTIR_raw/20230203_FTIR.TXT",
+FDP(raw_path="D:/Data Analysis/Gas_data/Raw_data/FTIR_raw/2023-07-08_FTIR.TXT",
     clean_path="D:/Data Analysis/Gas_data/Clean_data/FTIR_clean")
 
-FTIR_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/FTIR_clean/20230822_FDP.CSV")
-
-# Convert DateTime columns to POSIXct
-#FTIR_1$DateTime <- as.POSIXct(FTIR_1$DateTime, format = "%d/%m/%Y %H:%M:%S")
-#OTICE_1$DateTime <- as.POSIXct(OTICE_1$DateTime, format = "%d/%m/%Y %H:%M:%S")
-
-# Round DateTime to the nearest minute
-#FTIR_1$DateTime <- round_date(FTIR_1$DateTime, "minute")
-#OTICE_1$DateTime <- round_date(OTICE_1$DateTime, "minute")
-
-# Merge data frames by DateTime
-#merged_data <- merge(FTIR_1, OTICE_1, by = "DateTime", all = TRUE)
+FTIR_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/FTIR_clean/20230830_FDP.CSV")
 
 ########### DATA VISUALIZATION ###############
 FTIR_1 <- FTIR_data %>% 
-  filter(DateTime >= "14/07/2023 14:02:22",
-         DateTime <= "14/07/2023 14:22:22") %>% na.omit()
+  filter(Date.time.F >= "2023-07-21 13:20:38",
+         Date.time.F <= "2023-07-21 13:48:00") %>% na.omit()
 
-write.csv(FTIR_1, file = "FTIR_1.csv", row.names = FALSE)
-
-ggline(FTIR_1, x="DateTime", y="CH4")
+ggline(FTIR_1, x="Date.time.F", y="CH4.F")
 
 
 #OTICE
 OTICE_1 <- OTICE_data %>% 
-  filter(DateTime >= "14/07/2023 14:02:22",
-         DateTime <= "14/07/2023 14:22:22") %>% na.omit()
+  filter(Date.time.O >= "2023-07-21 13:20:38",
+         Date.time.O <= "2023-07-21 13:48:00") %>% na.omit()
 
-write.csv(OTICE_1, file = "OTICE_1.csv", row.names = FALSE)
+ggline(OTICE_1, x="Date.time.O", y="CH4.O")
+
 
 OTICE_1$CH4_ppm <- 0.5471 * OTICE_1$CH4^(-0.463)
 OTICE_1$NH3_ppm <- 67.652 * OTICE_1$NH3^(-0.518)
