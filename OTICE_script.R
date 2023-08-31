@@ -43,7 +43,7 @@ OTICE_1$CH4.O <- 67.652 * OTICE_1$CH4^(-0.518)
 
 OTICE_1 <- OTICE_1 %>%
   mutate(Date.time = round_date(Date.time, "1 minute")) %>% #Round off by 1 minute to match FTIR frequency
-  group_by(Sampling.point) %>% 
+  group_by(Date.time) %>% 
   summarise_all(mean)
 
 
