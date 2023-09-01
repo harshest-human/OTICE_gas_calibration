@@ -13,11 +13,13 @@ library(vroom)
 library(lubridate)
 library(purrr)
 library(data.table)
-#source("D:/Data Analysis/GCDP/GCDP_function_script.R")
-#source("https://raw.githubusercontent.com/harshest-human/GCDP/main/GCDP_function_script.R")
+
 
 
 ########### DATA IMPORTING ###############
+#source("D:/Data Analysis/GCDP/GCDP_function_script.R")
+#source("https://raw.githubusercontent.com/harshest-human/GCDP/main/GCDP_function_script.R")
+
 #ODP(raw_path="D:/Data Analysis/Gas_data/Raw_data/OTICE_raw", clean_path="D:/Data Analysis/Gas_data/Clean_data/OTICE_clean")
 OTICE_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/OTICE_clean/20230830_ODP.CSV") #check today's date
 
@@ -103,7 +105,49 @@ ggline(OTICE_7, x="Date.time", y="NH3.O", color = "Sampling.point")
 ########### DATA VISUALIZATION ###############
 #ggline(FTIR_1, x="Date.time", y="CH4.F")
 
+#remove outlier 1.5 times IQR
+source("D:/Data Analysis/OTICE_gas_calibration/remove_outliers_function.R")
+OTICE_1$NH3.O <- remove_outliers(OTICE_1$NH3.O)
+OTICE_1$CH4.O <- remove_outliers(OTICE_1$CH4.O)
 
+ggplot(OTICE_1, aes(x = Sampling.point, y = CH4.O)) + geom_boxplot()
+ggplot(OTICE_1, aes(x = Sampling.point, y = NH3.O)) + geom_boxplot()
+
+OTICE_2$NH3.O <- remove_outliers(OTICE_2$NH3.O)
+OTICE_2$CH4.O <- remove_outliers(OTICE_2$CH4.O)
+
+ggplot(OTICE_2, aes(x = Sampling.point, y = CH4.O)) + geom_boxplot()
+ggplot(OTICE_2, aes(x = Sampling.point, y = NH3.O)) + geom_boxplot()
+
+OTICE_3$NH3.O <- remove_outliers(OTICE_3$NH3.O)
+OTICE_3$CH4.O <- remove_outliers(OTICE_3$CH4.O)
+
+ggplot(OTICE_3, aes(x = Sampling.point, y = CH4.O)) + geom_boxplot()
+ggplot(OTICE_3, aes(x = Sampling.point, y = NH3.O)) + geom_boxplot()
+
+OTICE_4$NH3.O <- remove_outliers(OTICE_4$NH3.O)
+OTICE_4$CH4.O <- remove_outliers(OTICE_4$CH4.O)
+
+ggplot(OTICE_4, aes(x = Sampling.point, y = CH4.O)) + geom_boxplot()
+ggplot(OTICE_4, aes(x = Sampling.point, y = NH3.O)) + geom_boxplot()
+
+OTICE_5$NH3.O <- remove_outliers(OTICE_5$NH3.O)
+OTICE_5$CH4.O <- remove_outliers(OTICE_5$CH4.O)
+
+ggplot(OTICE_5, aes(x = Sampling.point, y = CH4.O)) + geom_boxplot()
+ggplot(OTICE_5, aes(x = Sampling.point, y = NH3.O)) + geom_boxplot()
+
+OTICE_6$NH3.O <- remove_outliers(OTICE_6$NH3.O)
+OTICE_6$CH4.O <- remove_outliers(OTICE_6$CH4.O)
+
+ggplot(OTICE_6, aes(x = Sampling.point, y = CH4.O)) + geom_boxplot()
+ggplot(OTICE_6, aes(x = Sampling.point, y = NH3.O)) + geom_boxplot()
+
+OTICE_7$NH3.O <- remove_outliers(OTICE_7$NH3.O)
+OTICE_7$CH4.O <- remove_outliers(OTICE_7$CH4.O)
+
+ggplot(OTICE_7, aes(x = Sampling.point, y = CH4.O)) + geom_boxplot()
+ggplot(OTICE_7, aes(x = Sampling.point, y = NH3.O)) + geom_boxplot()
 
 
 ########### MERGE ###############
