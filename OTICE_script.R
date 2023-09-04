@@ -207,20 +207,6 @@ merge_7 <- select(merge_7 , Date.time, Sampling.point, NH3.O, NH3.F, CH4.O, CH4.
 merge_8 <- left_join(OTICE_8, FTIR_8, by = c("Date.time" = "Date.time"))
 merge_8 <- select(merge_8 , Date.time, Sampling.point, NH3.O, NH3.F, CH4.O, CH4.F, CO2.F, CO2)
 
-########### Remove Outliers 1.5 IQR ###############
-#merge_4$NH3.O <- remove_outliers(merge_4$NH3.O)
-#merge_4$CH4.O <- remove_outliers(merge_4$CH4.O)
-
-#merge_5$NH3.O <- remove_outliers(merge_5$NH3.O)
-#merge_5$CH4.O <- remove_outliers(merge_5$CH4.O)
-
-#merge_6$NH3.O <- remove_outliers(merge_6$NH3.O)
-#merge_6$CH4.O <- remove_outliers(merge_6$CH4.O)
-
-#merge_7$NH3.O <- remove_outliers(merge_7$NH3.O)
-#merge_7$CH4.O <- remove_outliers(merge_7$CH4.O)
-
-#write.csv(merge_4, file = "merge_4.csv",row.names = FALSE)
 
 ########### MERGE VIZ ###############
 ggplot(merge_4, aes(x = Date.time)) +
@@ -230,9 +216,11 @@ ggplot(merge_4, aes(x = Date.time)) +
                    breaks = seq(min(merge_4$Date.time), max(merge_4$Date.time), by = "5 mins")) +
   scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
-       y = "CH4 Value") +
+       y = "CH4 PPM",
+       color = "Sensor Nodes") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "right")
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
 
 ggplot(merge_5, aes(x = Date.time)) +
@@ -240,11 +228,13 @@ ggplot(merge_5, aes(x = Date.time)) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
                    breaks = seq(min(merge_5$Date.time), max(merge_5$Date.time), by = "1 hour")) +
-  scale_y_continuous(breaks = seq(0, max(merge_5$CH4.O, na.rm = TRUE), by = 2)) + 
+  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
-       y = "CH4 Value") +
+       y = "CH4 PPM",
+       color = "Sensor Nodes") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "right")
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
 
 ggplot(merge_6, aes(x = Date.time)) +
@@ -252,11 +242,13 @@ ggplot(merge_6, aes(x = Date.time)) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
                    breaks = seq(min(merge_6$Date.time), max(merge_6$Date.time), by = "6 hours")) +
-  scale_y_continuous(breaks = seq(0, max(merge_6$CH4.O, na.rm = TRUE), by = 2)) + 
+  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
-       y = "CH4 Value") +
+       y = "CH4 PPM",
+       color = "Sensor Nodes") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "right")
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
 
 ggplot(merge_7, aes(x = Date.time)) +
@@ -264,20 +256,24 @@ ggplot(merge_7, aes(x = Date.time)) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
                    breaks = seq(min(merge_7$Date.time), max(merge_7$Date.time), by = "12 hours")) +
-  scale_y_continuous(breaks = seq(0, max(merge_7$CH4.O, na.rm = TRUE), by = 2)) + 
+  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
-       y = "CH4 Value") +
+       y = "CH4 PPM",
+       color = "Sensor Nodes") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "right")
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
 ggplot(merge_8, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
                    breaks = seq(min(merge_8$Date.time), max(merge_8$Date.time), by = "6 hours")) +
-  scale_y_continuous(breaks = seq(0, max(merge_8$CH4.O, na.rm = TRUE), by = 2)) + 
+  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
-       y = "CH4 Value") +
+       y = "CH4 PPM",
+       color = "Sensor Nodes") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.position = "right")
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
