@@ -13,11 +13,9 @@ library(vroom)
 library(lubridate)
 library(purrr)
 library(data.table)
-
-#remove outlier 1.5 times IQR
-source("D:/Data Analysis/OTICE_gas_calibration/remove_outliers_function.R")
 #source("D:/Data Analysis/GCDP/GCDP_function_script.R")
 #source("https://raw.githubusercontent.com/harshest-human/GCDP/main/GCDP_function_script.R")
+
 
 ########### DATA IMPORTING ###############
 #source("D:/Data Analysis/GCDP/GCDP_function_script.R")
@@ -208,8 +206,8 @@ merge_8 <- left_join(OTICE_8, FTIR_8, by = c("Date.time" = "Date.time"))
 merge_8 <- select(merge_8 , Date.time, Sampling.point, NH3.O, NH3.F, CH4.O, CH4.F, CO2.F, CO2)
 
 
-########### MERGE VIZ ###############
-ggplot(merge_4, aes(x = Date.time)) +
+########### CH4 VIZ ###############
+CH4_plot4 <- ggplot(merge_4, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
@@ -223,7 +221,7 @@ ggplot(merge_4, aes(x = Date.time)) +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
 
-ggplot(merge_5, aes(x = Date.time)) +
+CH4_plot5 <- ggplot(merge_5, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
@@ -237,7 +235,7 @@ ggplot(merge_5, aes(x = Date.time)) +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
 
-ggplot(merge_6, aes(x = Date.time)) +
+CH4_plot6 <- ggplot(merge_6, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
@@ -251,7 +249,7 @@ ggplot(merge_6, aes(x = Date.time)) +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
 
-ggplot(merge_7, aes(x = Date.time)) +
+CH4_plot7 <- ggplot(merge_7, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
@@ -264,7 +262,8 @@ ggplot(merge_7, aes(x = Date.time)) +
         legend.position = "right") +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
-ggplot(merge_8, aes(x = Date.time)) +
+
+CH4_plot8 <- ggplot(merge_8, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
@@ -276,4 +275,71 @@ ggplot(merge_8, aes(x = Date.time)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right") +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
+
+########### NH3 VIZ ###############
+NH3_plot4 <- ggplot(merge_4, aes(x = Date.time)) +
+  geom_line(aes(y = NH3.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = NH3.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_4$Date.time), max(merge_4$Date.time), by = "5 mins")) +
+  labs(x = "Date and Time",
+       y = "NH3 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
+
+
+NH3_plot5 <- ggplot(merge_5, aes(x = Date.time)) +
+  geom_line(aes(y = NH3.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = NH3.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_5$Date.time), max(merge_5$Date.time), by = "1 hour")) +
+  labs(x = "Date and Time",
+       y = "NH3 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
+
+
+NH3_plot6 <- ggplot(merge_6, aes(x = Date.time)) +
+  geom_line(aes(y = NH3.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = NH3.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_6$Date.time), max(merge_6$Date.time), by = "6 hours")) + 
+  labs(x = "Date and Time",
+       y = "NH3 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
+
+
+NH3_plot7 <- ggplot(merge_7, aes(x = Date.time)) +
+  geom_line(aes(y = NH3.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = NH3.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_7$Date.time), max(merge_7$Date.time), by = "12 hours")) +
+  labs(x = "Date and Time",
+       y = "NH3 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
+
+NH3_plot8 <- ggplot(merge_8, aes(x = Date.time)) +
+  geom_line(aes(y = NH3.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = NH3.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_8$Date.time), max(merge_8$Date.time), by = "6 hours")) +
+  labs(x = "Date and Time",
+       y = "NH3 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
+
+
+
 
