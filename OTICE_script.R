@@ -165,7 +165,7 @@ merge_7 <- select(merge_7 , Date.time, NH3.O, CH4.O, NH3.F, CH4.F, CO2.F, CO2)
 
 ########### MERGE VIZ ###############
 # CH4
-ggplot(merge_4, aes(x = Date.time)) +
+g1 <- ggplot(merge_4, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
   geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
   labs(
@@ -179,7 +179,7 @@ ggplot(merge_4, aes(x = Date.time)) +
   ) +
   theme_minimal()
 
-ggplot(merge_5, aes(x = Date.time)) +
+g2 <- ggplot(merge_5, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
   geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
   labs(
@@ -193,7 +193,7 @@ ggplot(merge_5, aes(x = Date.time)) +
   ) +
   theme_minimal()
 
-ggplot(merge_6, aes(x = Date.time)) +
+g3 <- ggplot(merge_6, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
   geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
   labs(
@@ -207,7 +207,7 @@ ggplot(merge_6, aes(x = Date.time)) +
   ) +
   theme_minimal()
 
-ggplot(merge_7, aes(x = Date.time)) +
+g4 <- ggplot(merge_7, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
   geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
   labs(
@@ -222,7 +222,7 @@ ggplot(merge_7, aes(x = Date.time)) +
   theme_minimal()
 
 # NH3
-ggplot(merge_4, aes(x = Date.time)) +
+g5 <- ggplot(merge_4, aes(x = Date.time)) +
   geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
   geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
   labs(
@@ -236,7 +236,7 @@ ggplot(merge_4, aes(x = Date.time)) +
   ) +
   theme_minimal()
 
-ggplot(merge_5, aes(x = Date.time)) +
+g6 <- ggplot(merge_5, aes(x = Date.time)) +
   geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
   geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
   labs(
@@ -250,7 +250,7 @@ ggplot(merge_5, aes(x = Date.time)) +
   ) +
   theme_minimal()
 
-ggplot(merge_6, aes(x = Date.time)) +
+g7 <- ggplot(merge_6, aes(x = Date.time)) +
   geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
   geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
   labs(
@@ -264,7 +264,7 @@ ggplot(merge_6, aes(x = Date.time)) +
   ) +
   theme_minimal()
 
-ggplot(merge_7, aes(x = Date.time)) +
+g8 <- ggplot(merge_7, aes(x = Date.time)) +
   geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
   geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
   labs(
@@ -277,6 +277,16 @@ ggplot(merge_7, aes(x = Date.time)) +
     labels = c("NH3.O", "NH3.F")
   ) +
   theme_minimal()
+
+# Save each plot as a PDF
+ggsave("plot1.pdf", g1, width = 8, height = 5, units = "in")
+ggsave("plot2.pdf", g2, width = 8, height = 5, units = "in")
+ggsave("plot3.pdf", g3, width = 8, height = 5, units = "in")
+ggsave("plot4.pdf", g4, width = 8, height = 5, units = "in")
+ggsave("plot5.pdf", g5, width = 8, height = 5, units = "in")
+ggsave("plot6.pdf", g6, width = 8, height = 5, units = "in")
+ggsave("plot7.pdf", g7, width = 8, height = 5, units = "in")
+ggsave("plot8.pdf", g8, width = 8, height = 5, units = "in")
 
 
 ########### OTICE Sampling.point Viz ###############
