@@ -14,6 +14,10 @@ library(lubridate)
 library(purrr)
 library(data.table)
 
+#remove outlier 1.5 times IQR
+source("D:/Data Analysis/OTICE_gas_calibration/remove_outliers_function.R")
+#source("D:/Data Analysis/GCDP/GCDP_function_script.R")
+#source("https://raw.githubusercontent.com/harshest-human/GCDP/main/GCDP_function_script.R")
 
 ########### DATA IMPORTING ###############
 #source("D:/Data Analysis/GCDP/GCDP_function_script.R")
@@ -47,66 +51,100 @@ OTICE_1 <- OTICE_data %>%
   filter(Date.time >= as.POSIXct("2023-06-27 13:20:38", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-06-30 13:48:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
-  mutate(Date.time = round_date(Date.time, "1 minute")) %>%
-  group_by(Date.time) %>% 
-  summarise_all(mean)
+  group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
+  summarise(
+    mean_temperature = mean(temperature),
+    CH4.O = mean(CH4.O),
+    NH3.O = mean(NH3),
+    CO2 = mean(CO2))
 
 OTICE_2 <- OTICE_data %>% 
   filter(Date.time >= as.POSIXct("2023-07-06 08:22:24", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-07-06 11:16:35", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit() %>%
-  mutate(Date.time = round_date(Date.time, "1 minute")) %>%
-  group_by(Date.time) %>% 
-  summarise_all(mean)
+  na.omit()%>%
+  group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
+  summarise(
+    mean_temperature = mean(temperature),
+    CH4.O = mean(CH4.O),
+    NH3.O = mean(NH3),
+    CO2 = mean(CO2))
 
 OTICE_3 <- OTICE_data %>% 
   filter(Date.time >= as.POSIXct("2023-07-12 16:07:59", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-07-20 13:20:38", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit() %>%
-  mutate(Date.time = round_date(Date.time, "1 minute")) %>%
-  group_by(Date.time) %>% 
-  summarise_all(mean)
+  na.omit()%>%
+  group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
+  summarise(
+    mean_temperature = mean(temperature),
+    CH4.O = mean(CH4.O),
+    NH3.O = mean(NH3),
+    CO2 = mean(CO2))
 
 OTICE_4 <- OTICE_data %>% 
   filter(Date.time >= as.POSIXct("2023-07-21 13:22:38", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-07-21 13:48:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
-  mutate(Date.time = round_date(Date.time, "1 minute")) %>%
-  group_by(Date.time) %>% 
-  summarise_all(mean)
+  group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
+  summarise(
+    mean_temperature = mean(temperature),
+    CH4.O = mean(CH4.O),
+    NH3.O = mean(NH3),
+    CO2 = mean(CO2))
 
 OTICE_5 <- OTICE_data %>% 
   filter(Date.time >= as.POSIXct("2023-07-31 12:53:59", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-07-31 16:42:39", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
-  mutate(Date.time = round_date(Date.time, "1 minute")) %>%
-  group_by(Date.time) %>% 
-  summarise_all(mean)
+  group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
+  summarise(
+    mean_temperature = mean(temperature),
+    CH4.O = mean(CH4.O),
+    NH3.O = mean(NH3),
+    CO2 = mean(CO2))
 
 OTICE_6 <- OTICE_data %>% 
   filter(Date.time >= as.POSIXct("2023-08-10 16:02:45", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-08-11 16:02:45", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
-  mutate(Date.time = round_date(Date.time, "1 minute")) %>%
-  group_by(Date.time) %>% 
-  summarise_all(mean)
+  group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
+  summarise(
+    mean_temperature = mean(temperature),
+    CH4.O = mean(CH4.O),
+    NH3.O = mean(NH3),
+    CO2 = mean(CO2))
 
 OTICE_7 <- OTICE_data %>% 
   filter(Date.time >= as.POSIXct("2023-08-11 16:02:45", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-08-17 08:15:00", format = "%Y-%m-%d %H:%M:%S")) %>%
+         Date.time <= as.POSIXct("2023-08-15 08:15:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
-  mutate(Date.time = round_date(Date.time, "1 minute")) %>%
-  group_by(Date.time) %>% 
-  summarise_all(mean)
+  group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
+  summarise(
+    mean_temperature = mean(temperature),
+    CH4.O = mean(CH4.O),
+    NH3.O = mean(NH3),
+    CO2 = mean(CO2))
 
 OTICE_8 <- OTICE_data %>% 
+  filter(Date.time >= as.POSIXct("2023-08-15 16:00:00", format = "%Y-%m-%d %H:%M:%S"),
+         Date.time <= as.POSIXct("2023-08-16 17:00:00", format = "%Y-%m-%d %H:%M:%S")) %>%
+  na.omit() %>%
+  group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
+  summarise(
+    mean_temperature = mean(temperature),
+    CH4.O = mean(CH4.O),
+    NH3.O = mean(NH3),
+    CO2 = mean(CO2))
+
+OTICE_9 <- OTICE_data %>% 
   filter(Date.time >= as.POSIXct("2023-08-17 11:02:32", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-08-22 06:59:59", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
-  mutate(Date.time = round_date(Date.time, "1 minute")) %>%
-  group_by(Date.time) %>% 
-  summarise_all(mean)
-
+  group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
+  summarise(
+    mean_temperature = mean(temperature),
+    CH4.O = mean(CH4.O),
+    NH3.O = mean(NH3),
+    CO2 = mean(CO2))
 
 # FTIR
 FTIR_data$Date.time <- as.POSIXct(FTIR_data$Date.time, format = "%Y-%m-%d %H:%M:%S")
@@ -138,162 +176,112 @@ FTIR_6 <- FTIR_data %>%
 
 FTIR_7 <- FTIR_data %>% 
   filter(Date.time >= as.POSIXct("2023-08-11 16:02:45", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-08-17 08:15:00", format = "%Y-%m-%d %H:%M:%S")) %>%
+         Date.time <= as.POSIXct("2023-08-15 08:15:00", format = "%Y-%m-%d %H:%M:%S")) %>%
+  na.omit() %>%
+  mutate(Date.time = round_date(Date.time, "1 minute")) %>%
+  group_by(Date.time) %>% 
+  summarise_all(mean)
+
+FTIR_8 <- FTIR_data %>% 
+  filter(Date.time >= as.POSIXct("2023-08-15 16:00:00", format = "%Y-%m-%d %H:%M:%S"),
+         Date.time <= as.POSIXct("2023-08-16 17:00:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   mutate(Date.time = round_date(Date.time, "1 minute")) %>%
   group_by(Date.time) %>% 
   summarise_all(mean)
 
 ########### MERGE ###############
-
-# Create a function to find the nearest timestamp
-find_nearest_timestamp <- function(x, timestamps){timestamps[which.min(abs(timestamps - x))]}
-
-# Merge FTIR_4 and OTICE_4 by finding the nearest timestamp
+# Merge FTIR and OTICE
 merge_4 <- left_join(OTICE_4, FTIR_4, by = c("Date.time" = "Date.time"))
-merge_4 <- select(merge_4, Date.time, NH3.O, CH4.O, NH3.F, CH4.F)
-#write.csv(merge_4, file = "merge_4.csv",row.names = FALSE)
+merge_4 <- select(merge_4 , Date.time, Sampling.point, NH3.O, NH3.F, CH4.O, CH4.F, CO2.F, CO2)
 
 merge_5 <- left_join(OTICE_5, FTIR_5, by = c("Date.time" = "Date.time"))
-merge_5 <- select(merge_5 , Date.time, NH3.O, CH4.O, NH3.F, CH4.F)
+merge_5 <- select(merge_5 , Date.time, Sampling.point, NH3.O, NH3.F, CH4.O, CH4.F, CO2.F, CO2)
 
 merge_6 <- left_join(OTICE_6, FTIR_6, by = c("Date.time" = "Date.time"))
-merge_6 <- select(merge_6 , Date.time, NH3.O, CH4.O, NH3.F, CH4.F)
+merge_6 <- select(merge_6 , Date.time, Sampling.point, NH3.O, NH3.F, CH4.O, CH4.F, CO2.F, CO2)
 
 merge_7 <- left_join(OTICE_7, FTIR_7, by = c("Date.time" = "Date.time"))
-merge_7 <- select(merge_7 , Date.time, NH3.O, CH4.O, NH3.F, CH4.F, CO2.F, CO2)
+merge_7 <- select(merge_7 , Date.time, Sampling.point, NH3.O, NH3.F, CH4.O, CH4.F, CO2.F, CO2)
+
+merge_8 <- left_join(OTICE_8, FTIR_8, by = c("Date.time" = "Date.time"))
+merge_8 <- select(merge_8 , Date.time, Sampling.point, NH3.O, NH3.F, CH4.O, CH4.F, CO2.F, CO2)
+
+########### Remove Outliers 1.5 IQR ###############
+#merge_4$NH3.O <- remove_outliers(merge_4$NH3.O)
+#merge_4$CH4.O <- remove_outliers(merge_4$CH4.O)
+
+#merge_5$NH3.O <- remove_outliers(merge_5$NH3.O)
+#merge_5$CH4.O <- remove_outliers(merge_5$CH4.O)
+
+#merge_6$NH3.O <- remove_outliers(merge_6$NH3.O)
+#merge_6$CH4.O <- remove_outliers(merge_6$CH4.O)
+
+#merge_7$NH3.O <- remove_outliers(merge_7$NH3.O)
+#merge_7$CH4.O <- remove_outliers(merge_7$CH4.O)
+
+#write.csv(merge_4, file = "merge_4.csv",row.names = FALSE)
 
 ########### MERGE VIZ ###############
-# CH4
-g1 <- ggplot(merge_4, aes(x = Date.time)) +
-  geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
-  geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
-  labs(
-    x = "Date and Time (2023-07-21)",
-    y = "CH4 Value"
-  ) +
-  scale_color_manual(
-    values = c("CH4.O" = "blue", "CH4.F" = "red"),
-    breaks = c("CH4.O", "CH4.F"),
-    labels = c("CH4.O", "CH4.F")
-  ) +
-  theme_minimal()
+ggplot(merge_4, aes(x = Date.time)) +
+  geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_4$Date.time), max(merge_4$Date.time), by = "2 mins")) +
+  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
+  labs(x = "Date and Time",
+       y = "CH4 Value") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right")
 
-g2 <- ggplot(merge_5, aes(x = Date.time)) +
-  geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
-  geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
-  labs(
-    x = "Date and Time (2023-07-31)",
-    y = "CH4 Value"
-  ) +
-  scale_color_manual(
-    values = c("CH4.O" = "blue", "CH4.F" = "red"),
-    breaks = c("CH4.O", "CH4.F"),
-    labels = c("CH4.O", "CH4.F")
-  ) +
-  theme_minimal()
 
-g3 <- ggplot(merge_6, aes(x = Date.time)) +
-  geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
-  geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
-  labs(
-    x = "Date and Time (2023-08-10 to 2023-08-11)",
-    y = "CH4 Value"
-  ) +
-  scale_color_manual(
-    values = c("CH4.O" = "blue", "CH4.F" = "red"),
-    breaks = c("CH4.O", "CH4.F"),
-    labels = c("CH4.O", "CH4.F")
-  ) +
-  theme_minimal()
+ggplot(merge_5, aes(x = Date.time)) +
+  geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_5$Date.time), max(merge_5$Date.time), by = "20 mins")) +
+  scale_y_continuous(breaks = seq(0, max(merge_5$CH4.O, na.rm = TRUE), by = 2)) + 
+  labs(x = "Date and Time",
+       y = "CH4 Value") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right")
 
-g4 <- ggplot(merge_7, aes(x = Date.time)) +
-  geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
-  geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
-  labs(
-    x = "Date and Time (2023-08-11 to 2023-08-17)",
-    y = "CH4 Value"
-  ) +
-  scale_color_manual(
-    values = c("CH4.O" = "blue", "CH4.F" = "red"),
-    breaks = c("CH4.O", "CH4.F"),
-    labels = c("CH4.O", "CH4.F")
-  ) +
-  theme_minimal()
 
-# NH3
-g5 <- ggplot(merge_4, aes(x = Date.time)) +
-  geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
-  geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
-  labs(
-    x = "Date and Time (2023-07-21)",
-    y = "NH3 Value"
-  ) +
-  scale_color_manual(
-    values = c("NH3.O" = "blue", "NH3.F" = "red"),
-    breaks = c("NH3.O", "NH3.F"),
-    labels = c("NH3.O", "NH3.F")
-  ) +
-  theme_minimal()
+ggplot(merge_6, aes(x = Date.time)) +
+  geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_6$Date.time), max(merge_6$Date.time), by = "120 mins")) +
+  scale_y_continuous(breaks = seq(0, max(merge_6$CH4.O, na.rm = TRUE), by = 2)) + 
+  labs(x = "Date and Time",
+       y = "CH4 Value") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right")
 
-g6 <- ggplot(merge_5, aes(x = Date.time)) +
-  geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
-  geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
-  labs(
-    x = "Date and Time (2023-07-31)",
-    y = "NH3 Value"
-  ) +
-  scale_color_manual(
-    values = c("NH3.O" = "blue", "NH3.F" = "red"),
-    breaks = c("NH3.O", "NH3.F"),
-    labels = c("NH3.O", "NH3.F")
-  ) +
-  theme_minimal()
 
-g7 <- ggplot(merge_6, aes(x = Date.time)) +
-  geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
-  geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
-  labs(
-    x = "Date and Time (2023-08-10 to 2023-08-11)",
-    y = "NH3 Value"
-  ) +
-  scale_color_manual(
-    values = c("NH3.O" = "blue", "NH3.F" = "red"),
-    breaks = c("NH3.O", "NH3.F"),
-    labels = c("NH3.O", "NH3.F")
-  ) +
-  theme_minimal()
+ggplot(merge_7, aes(x = Date.time)) +
+  geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_7$Date.time), max(merge_7$Date.time), by = "1200 mins")) +
+  scale_y_continuous(breaks = seq(0, max(merge_7$CH4.O, na.rm = TRUE), by = 2)) + 
+  labs(x = "Date and Time",
+       y = "CH4 Value") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right")
 
-g8 <- ggplot(merge_7, aes(x = Date.time)) +
-  geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
-  geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
-  labs(
-    x = "Date and Time (2023-08-11 to 2023-08-17)",
-    y = "NH3 Value"
-  ) +
-  scale_color_manual(
-    values = c("NH3.O" = "blue", "NH3.F" = "red"),
-    breaks = c("NH3.O", "NH3.F"),
-    labels = c("NH3.O", "NH3.F")
-  ) +
-  theme_minimal()
-
-# Save each plot as a PDF
-ggsave("plot1.pdf", g1, width = 8, height = 5, units = "in")
-ggsave("plot2.pdf", g2, width = 8, height = 5, units = "in")
-ggsave("plot3.pdf", g3, width = 8, height = 5, units = "in")
-ggsave("plot4.pdf", g4, width = 8, height = 5, units = "in")
-ggsave("plot5.pdf", g5, width = 8, height = 5, units = "in")
-ggsave("plot6.pdf", g6, width = 8, height = 5, units = "in")
-ggsave("plot7.pdf", g7, width = 8, height = 5, units = "in")
-ggsave("plot8.pdf", g8, width = 8, height = 5, units = "in")
-
+ggplot(merge_8, aes(x = Date.time)) +
+  geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
+  geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_8$Date.time), max(merge_8$Date.time), by = "120 mins")) +
+  scale_y_continuous(breaks = seq(0, max(merge_8$CH4.O, na.rm = TRUE), by = 2)) + 
+  labs(x = "Date and Time",
+       y = "CH4 Value") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right")
 
 ########### OTICE Sampling.point Viz ###############
-#ggplot(FTIR_1, x="Date.time", y="CH4.F")
-#remove outlier 1.5 times IQR
-source("D:/Data Analysis/OTICE_gas_calibration/remove_outliers_function.R")
-
 OTICE_data$Date.time <- as.POSIXct(OTICE_data$Date.time, format = "%Y-%m-%d %H:%M:%S")
 
 OTICE_1.sec <- OTICE_data %>% 
