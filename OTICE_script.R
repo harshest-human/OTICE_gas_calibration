@@ -212,7 +212,6 @@ CH4_plot4 <- ggplot(merge_4, aes(x = Date.time)) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
                    breaks = seq(min(merge_4$Date.time), max(merge_4$Date.time), by = "5 mins")) +
-  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
        y = "CH4 PPM",
        color = "Sensor Nodes") +
@@ -225,8 +224,7 @@ CH4_plot5 <- ggplot(merge_5, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
-                   breaks = seq(min(merge_5$Date.time), max(merge_5$Date.time), by = "1 hour")) +
-  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
+                   breaks = seq(min(merge_5$Date.time), max(merge_5$Date.time), by = "1 hour")) + 
   labs(x = "Date and Time",
        y = "CH4 PPM",
        color = "Sensor Nodes") +
@@ -239,8 +237,7 @@ CH4_plot6 <- ggplot(merge_6, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
-                   breaks = seq(min(merge_6$Date.time), max(merge_6$Date.time), by = "6 hours")) +
-  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
+                   breaks = seq(min(merge_6$Date.time), max(merge_6$Date.time), by = "6 hours")) + 
   labs(x = "Date and Time",
        y = "CH4 PPM",
        color = "Sensor Nodes") +
@@ -253,8 +250,7 @@ CH4_plot7 <- ggplot(merge_7, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
-                   breaks = seq(min(merge_7$Date.time), max(merge_7$Date.time), by = "12 hours")) +
-  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
+                   breaks = seq(min(merge_7$Date.time), max(merge_7$Date.time), by = "12 hours")) + 
   labs(x = "Date and Time",
        y = "CH4 PPM",
        color = "Sensor Nodes") +
@@ -267,8 +263,7 @@ CH4_plot8 <- ggplot(merge_8, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
-                   breaks = seq(min(merge_8$Date.time), max(merge_8$Date.time), by = "6 hours")) +
-  scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
+                   breaks = seq(min(merge_8$Date.time), max(merge_8$Date.time), by = "6 hours")) + 
   labs(x = "Date and Time",
        y = "CH4 PPM",
        color = "Sensor Nodes") +
