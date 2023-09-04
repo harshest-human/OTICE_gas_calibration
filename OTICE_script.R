@@ -48,7 +48,7 @@ FTIR_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/FTIR_clean/20230830_
 OTICE_data$Date.time <- as.POSIXct(OTICE_data$Date.time, format = "%Y-%m-%d %H:%M:%S")
 
 OTICE_1 <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-06-27 13:20:38", format = "%Y-%m-%d %H:%M:%S"),
+  filter(Date.time >= as.POSIXct("2023-06-27 13:22:38", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-06-30 13:48:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
@@ -81,7 +81,7 @@ OTICE_3 <- OTICE_data %>%
     CO2 = mean(CO2))
 
 OTICE_4 <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-07-21 13:22:38", format = "%Y-%m-%d %H:%M:%S"),
+  filter(Date.time >= as.POSIXct("2023-07-21 13:24:38", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-07-21 13:48:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
@@ -150,7 +150,7 @@ OTICE_9 <- OTICE_data %>%
 FTIR_data$Date.time <- as.POSIXct(FTIR_data$Date.time, format = "%Y-%m-%d %H:%M:%S")
 
 FTIR_4 <- FTIR_data %>%
-  filter(Date.time >= as.POSIXct("2023-07-21 13:22:38", format = "%Y-%m-%d %H:%M:%S"),
+  filter(Date.time >= as.POSIXct("2023-07-21 13:24:38", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-07-21 13:48:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   mutate(Date.time = round_date(Date.time, "1 minute")) %>%
@@ -281,110 +281,3 @@ ggplot(merge_8, aes(x = Date.time)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right")
 
-########### OTICE Sampling.point Viz ###############
-OTICE_data$Date.time <- as.POSIXct(OTICE_data$Date.time, format = "%Y-%m-%d %H:%M:%S")
-
-OTICE_1.sec <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-06-27 13:20:38", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-06-30 13:48:00", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit() 
-OTICE_1.sec$NH3.O <- remove_outliers(OTICE_1.sec$NH3.O)
-OTICE_1.sec$CH4.O <- remove_outliers(OTICE_1.sec$CH4.O)
-
-
-OTICE_2.sec <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-07-06 08:22:24", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-07-06 11:16:35", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit()
-OTICE_2.sec$NH3.O <- remove_outliers(OTICE_2.sec$NH3.O)
-OTICE_2.sec$CH4.O <- remove_outliers(OTICE_2.sec$CH4.O)
-
-
-OTICE_3.sec <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-07-12 16:07:59", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-07-20 13:20:38", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit() 
-OTICE_3.sec$NH3.O <- remove_outliers(OTICE_3.sec$NH3.O)
-OTICE_3.sec$CH4.O <- remove_outliers(OTICE_3.sec$CH4.O)
-
-
-OTICE_4.sec <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-07-21 13:22:38", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-07-21 13:48:00", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit()
-OTICE_4.sec$NH3.O <- remove_outliers(OTICE_4.sec$NH3.O)
-OTICE_4.sec$CH4.O <- remove_outliers(OTICE_4.sec$CH4.O)
-
-
-OTICE_5.sec <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-07-31 12:53:59", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-07-31 16:42:39", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit()
-OTICE_5.sec$NH3.O <- remove_outliers(OTICE_5.sec$NH3.O)
-OTICE_5.sec$CH4.O <- remove_outliers(OTICE_5.sec$CH4.O)
-
-
-OTICE_6.sec <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-08-10 16:02:45", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-08-11 16:02:45", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit()
-OTICE_6.sec$NH3.O <- remove_outliers(OTICE_6.sec$NH3.O)
-OTICE_6.sec$CH4.O <- remove_outliers(OTICE_6.sec$CH4.O)
-
-
-OTICE_7.sec <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-08-11 16:02:45", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-08-17 08:15:00", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit()
-OTICE_7.sec$NH3.O <- remove_outliers(OTICE_7.sec$NH3.O)
-OTICE_7.sec$CH4.O <- remove_outliers(OTICE_7.sec$CH4.O)
-
-
-OTICE_8.sec <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-08-17 11:02:32", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-08-22 06:59:59", format = "%Y-%m-%d %H:%M:%S")) %>%
-  na.omit()
-OTICE_8.sec$NH3.O <- remove_outliers(OTICE_8.sec$NH3.O)
-OTICE_8.sec$CH4.O <- remove_outliers(OTICE_8.sec$CH4.O)
-
-
-########### OTICE VIZ LINEPLOT ###############
-ggplot(OTICE_1.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) +
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-ggplot(OTICE_1.sec, aes(x = Date.time, y = NH3.O, fill = Sampling.point)) +
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-
-ggplot(OTICE_2.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-ggplot(OTICE_2.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) +
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-
-ggplot(OTICE_3.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-ggplot(OTICE_3.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-
-ggplot(OTICE_4.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-ggplot(OTICE_4.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-
-ggplot(OTICE_5.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-ggplot(OTICE_5.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-
-ggplot(OTICE_6.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-ggplot(OTICE_6.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-
-ggplot(OTICE_7.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-ggplot(OTICE_7.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-
-ggplot(OTICE_8.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
-ggplot(OTICE_8.sec, aes(x = Date.time, y = CH4.O, fill = Sampling.point)) + 
-  geom_boxplot() +  scale_fill_discrete(name = "Sampling.point")
