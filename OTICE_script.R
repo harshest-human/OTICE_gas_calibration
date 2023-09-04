@@ -80,9 +80,9 @@ OTICE_3 <- OTICE_data %>%
     NH3.O = mean(NH3),
     CO2 = mean(CO2))
 
-OTICE_4 <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-07-21 13:24:38", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-07-21 13:48:00", format = "%Y-%m-%d %H:%M:%S")) %>%
+OTICE_4 <- OTICE_data %>%
+  filter(Date.time >= as.POSIXct("2023-07-21 13:26:00", format = "%Y-%m-%d %H:%M:%S"),
+         Date.time <= as.POSIXct("2023-07-21 13:46:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
   summarise(
@@ -103,8 +103,8 @@ OTICE_5 <- OTICE_data %>%
     CO2 = mean(CO2))
 
 OTICE_6 <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-08-10 16:02:45", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-08-11 16:02:45", format = "%Y-%m-%d %H:%M:%S")) %>%
+  filter(Date.time >= as.POSIXct("2023-08-10 18:02:45", format = "%Y-%m-%d %H:%M:%S"),
+         Date.time <= as.POSIXct("2023-08-11 18:02:45", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
   summarise(
@@ -114,7 +114,7 @@ OTICE_6 <- OTICE_data %>%
     CO2 = mean(CO2))
 
 OTICE_7 <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-08-11 16:02:45", format = "%Y-%m-%d %H:%M:%S"),
+  filter(Date.time >= as.POSIXct("2023-08-11 18:02:45", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-08-15 08:15:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
@@ -125,8 +125,8 @@ OTICE_7 <- OTICE_data %>%
     CO2 = mean(CO2))
 
 OTICE_8 <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-08-15 16:00:00", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-08-16 17:00:00", format = "%Y-%m-%d %H:%M:%S")) %>%
+  filter(Date.time >= as.POSIXct("2023-08-16 05:00:00", format = "%Y-%m-%d %H:%M:%S"),
+         Date.time <= as.POSIXct("2023-08-17 05:00:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   group_by(Sampling.point, Date.time = floor_date(Date.time, unit = "minute")) %>%
   summarise(
@@ -150,8 +150,8 @@ OTICE_9 <- OTICE_data %>%
 FTIR_data$Date.time <- as.POSIXct(FTIR_data$Date.time, format = "%Y-%m-%d %H:%M:%S")
 
 FTIR_4 <- FTIR_data %>%
-  filter(Date.time >= as.POSIXct("2023-07-21 13:24:38", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-07-21 13:48:00", format = "%Y-%m-%d %H:%M:%S")) %>%
+  filter(Date.time >= as.POSIXct("2023-07-21 13:26:00", format = "%Y-%m-%d %H:%M:%S"),
+         Date.time <= as.POSIXct("2023-07-21 13:46:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   mutate(Date.time = round_date(Date.time, "1 minute")) %>%
   group_by(Date.time) %>% 
@@ -167,15 +167,15 @@ FTIR_5 <- FTIR_data %>%
   summarise_all(mean)
 
 FTIR_6 <- FTIR_data %>% 
-  filter(Date.time >= as.POSIXct("2023-08-10 16:02:45", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-08-11 16:02:45", format = "%Y-%m-%d %H:%M:%S")) %>%
+  filter(Date.time >= as.POSIXct("2023-08-10 18:02:45", format = "%Y-%m-%d %H:%M:%S"),
+         Date.time <= as.POSIXct("2023-08-11 18:02:45", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   mutate(Date.time = round_date(Date.time, "1 minute")) %>%
   group_by(Date.time) %>% 
   summarise_all(mean)
 
 FTIR_7 <- FTIR_data %>% 
-  filter(Date.time >= as.POSIXct("2023-08-11 16:02:45", format = "%Y-%m-%d %H:%M:%S"),
+  filter(Date.time >= as.POSIXct("2023-08-11 18:02:45", format = "%Y-%m-%d %H:%M:%S"),
          Date.time <= as.POSIXct("2023-08-15 08:15:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   mutate(Date.time = round_date(Date.time, "1 minute")) %>%
@@ -183,8 +183,8 @@ FTIR_7 <- FTIR_data %>%
   summarise_all(mean)
 
 FTIR_8 <- FTIR_data %>% 
-  filter(Date.time >= as.POSIXct("2023-08-15 16:00:00", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-08-16 17:00:00", format = "%Y-%m-%d %H:%M:%S")) %>%
+  filter(Date.time >= as.POSIXct("2023-08-16 05:00:00", format = "%Y-%m-%d %H:%M:%S"),
+         Date.time <= as.POSIXct("2023-08-17 05:00:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   mutate(Date.time = round_date(Date.time, "1 minute")) %>%
   group_by(Date.time) %>% 
@@ -227,7 +227,7 @@ ggplot(merge_4, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
-                   breaks = seq(min(merge_4$Date.time), max(merge_4$Date.time), by = "2 mins")) +
+                   breaks = seq(min(merge_4$Date.time), max(merge_4$Date.time), by = "5 mins")) +
   scale_y_continuous(breaks = seq(0, max(merge_4$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
        y = "CH4 Value") +
@@ -239,7 +239,7 @@ ggplot(merge_5, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
-                   breaks = seq(min(merge_5$Date.time), max(merge_5$Date.time), by = "20 mins")) +
+                   breaks = seq(min(merge_5$Date.time), max(merge_5$Date.time), by = "1 hour")) +
   scale_y_continuous(breaks = seq(0, max(merge_5$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
        y = "CH4 Value") +
@@ -251,7 +251,7 @@ ggplot(merge_6, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
-                   breaks = seq(min(merge_6$Date.time), max(merge_6$Date.time), by = "120 mins")) +
+                   breaks = seq(min(merge_6$Date.time), max(merge_6$Date.time), by = "6 hours")) +
   scale_y_continuous(breaks = seq(0, max(merge_6$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
        y = "CH4 Value") +
@@ -263,7 +263,7 @@ ggplot(merge_7, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
-                   breaks = seq(min(merge_7$Date.time), max(merge_7$Date.time), by = "1200 mins")) +
+                   breaks = seq(min(merge_7$Date.time), max(merge_7$Date.time), by = "12 hours")) +
   scale_y_continuous(breaks = seq(0, max(merge_7$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
        y = "CH4 Value") +
@@ -274,7 +274,7 @@ ggplot(merge_8, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = Sampling.point), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
-                   breaks = seq(min(merge_8$Date.time), max(merge_8$Date.time), by = "120 mins")) +
+                   breaks = seq(min(merge_8$Date.time), max(merge_8$Date.time), by = "6 hours")) +
   scale_y_continuous(breaks = seq(0, max(merge_8$CH4.O, na.rm = TRUE), by = 2)) + 
   labs(x = "Date and Time",
        y = "CH4 Value") +
