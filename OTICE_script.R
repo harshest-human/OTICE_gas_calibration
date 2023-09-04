@@ -150,12 +150,7 @@ FTIR_7 <- FTIR_data %>%
 find_nearest_timestamp <- function(x, timestamps){timestamps[which.min(abs(timestamps - x))]}
 
 # Merge FTIR_4 and OTICE_4 by finding the nearest timestamp
-merge_4 <- OTICE_4 %>%
-  rowwise() %>%
-  mutate(Nearest_Time = find_nearest_timestamp(Date.time, OTICE_4$Date.time)) %>%
-  left_join(FTIR_4, by = c("Nearest_Time" = "Date.time")) %>%
-  select(-Nearest_Time)
-  
+merge_4 <- left_join(OTICE_4, FTIR_4, by = c("Date.time" = "Date.time"))
 merge_4 <- select(merge_4, Date.time, NH3.O, CH4.O, NH3.F, CH4.F)
 #write.csv(merge_4, file = "merge_4.csv",row.names = FALSE)
 
@@ -169,11 +164,12 @@ merge_7 <- left_join(OTICE_7, FTIR_7, by = c("Date.time" = "Date.time"))
 merge_7 <- select(merge_7 , Date.time, NH3.O, CH4.O, NH3.F, CH4.F, CO2.F, CO2)
 
 ########### MERGE VIZ ###############
+# CH4
 ggplot(merge_4, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
   geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
   labs(
-    x = "Date and Time",
+    x = "Date and Time (2023-07-21)",
     y = "CH4 Value"
   ) +
   scale_color_manual(
@@ -187,7 +183,7 @@ ggplot(merge_5, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
   geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
   labs(
-    x = "Date and Time",
+    x = "Date and Time (2023-07-31)",
     y = "CH4 Value"
   ) +
   scale_color_manual(
@@ -201,7 +197,7 @@ ggplot(merge_6, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
   geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
   labs(
-    x = "Date and Time",
+    x = "Date and Time (2023-08-10 to 2023-08-11)",
     y = "CH4 Value"
   ) +
   scale_color_manual(
@@ -215,13 +211,70 @@ ggplot(merge_7, aes(x = Date.time)) +
   geom_line(aes(y = CH4.O, color = "CH4.O"), size = 1) +
   geom_line(aes(y = CH4.F, color = "CH4.F"), size = 1) +
   labs(
-    x = "Date and Time",
+    x = "Date and Time (2023-08-11 to 2023-08-17)",
     y = "CH4 Value"
   ) +
   scale_color_manual(
     values = c("CH4.O" = "blue", "CH4.F" = "red"),
     breaks = c("CH4.O", "CH4.F"),
     labels = c("CH4.O", "CH4.F")
+  ) +
+  theme_minimal()
+
+# NH3
+ggplot(merge_4, aes(x = Date.time)) +
+  geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
+  geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
+  labs(
+    x = "Date and Time (2023-07-21)",
+    y = "NH3 Value"
+  ) +
+  scale_color_manual(
+    values = c("NH3.O" = "blue", "NH3.F" = "red"),
+    breaks = c("NH3.O", "NH3.F"),
+    labels = c("NH3.O", "NH3.F")
+  ) +
+  theme_minimal()
+
+ggplot(merge_5, aes(x = Date.time)) +
+  geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
+  geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
+  labs(
+    x = "Date and Time (2023-07-31)",
+    y = "NH3 Value"
+  ) +
+  scale_color_manual(
+    values = c("NH3.O" = "blue", "NH3.F" = "red"),
+    breaks = c("NH3.O", "NH3.F"),
+    labels = c("NH3.O", "NH3.F")
+  ) +
+  theme_minimal()
+
+ggplot(merge_6, aes(x = Date.time)) +
+  geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
+  geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
+  labs(
+    x = "Date and Time (2023-08-10 to 2023-08-11)",
+    y = "NH3 Value"
+  ) +
+  scale_color_manual(
+    values = c("NH3.O" = "blue", "NH3.F" = "red"),
+    breaks = c("NH3.O", "NH3.F"),
+    labels = c("NH3.O", "NH3.F")
+  ) +
+  theme_minimal()
+
+ggplot(merge_7, aes(x = Date.time)) +
+  geom_line(aes(y = NH3.O, color = "NH3.O"), size = 1) +
+  geom_line(aes(y = NH3.F, color = "NH3.F"), size = 1) +
+  labs(
+    x = "Date and Time (2023-08-11 to 2023-08-17)",
+    y = "NH3 Value"
+  ) +
+  scale_color_manual(
+    values = c("NH3.O" = "blue", "NH3.F" = "red"),
+    breaks = c("NH3.O", "NH3.F"),
+    labels = c("NH3.O", "NH3.F")
   ) +
   theme_minimal()
 
