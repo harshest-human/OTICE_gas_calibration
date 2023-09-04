@@ -341,5 +341,29 @@ NH3_plot8 <- ggplot(merge_8, aes(x = Date.time)) +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
 
+###### View plots ######
+CH4_plot4
+CH4_plot5
+CH4_plot6
+CH4_plot7
+CH4_plot8
 
+NH3_plot4
+NH3_plot5
+NH3_plot6
+NH3_plot7
+NH3_plot8
 
+###### Save plots as a PDF ######
+# Save each plot on a separate page in the PDF
+ggsave("CH4_plot4.pdf", CH4_plot4, width = 8, height = 5, units = "in")
+ggsave("CH4_plot5.pdf", CH4_plot5, width = 8, height = 5, units = "in")
+ggsave("CH4_plot6.pdf", CH4_plot6, width = 8, height = 5, units = "in")
+ggsave("CH4_plot7.pdf", CH4_plot7, width = 8, height = 5, units = "in")
+ggsave("CH4_plot8.pdf", CH4_plot8, width = 8, height = 5, units = "in")
+
+ggsave("NH3_plot4.pdf", NH3_plot4, width = 8, height = 5, units = "in")
+ggsave("NH3_plot5.pdf", NH3_plot5, width = 8, height = 5, units = "in")
+ggsave("NH3_plot6.pdf", NH3_plot6, width = 8, height = 5, units = "in")
+ggsave("NH3_plot7.pdf", NH3_plot7, width = 8, height = 5, units = "in")
+ggsave("NH3_plot8.pdf", NH3_plot8, width = 8, height = 5, units = "in")
