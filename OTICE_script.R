@@ -570,5 +570,3 @@ ggsave("NH3_plot6_R.pdf", NH3_plot6, width = 8, height = 5, units = "in")
 ggsave("NH3_plot7_R.pdf", NH3_plot7, width = 8, height = 5, units = "in")
 ggsave("NH3_plot8_R.pdf", NH3_plot8, width = 8, height = 5, units = "in")
 
-
-
