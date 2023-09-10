@@ -38,6 +38,11 @@ OTICE_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/OTICE_clean/2023083
 OTICE_data$NH3.O <- 0.5471 * OTICE_data$NH3^(-0.463)
 OTICE_data$CH4.O <- 67.652 * OTICE_data$CH4^(-0.518)
 
+# Write clean table
+OTICE_gas_data <- select(OTICE_data, Sampling.point, Date.time, temperature, H2O, NH3.O, CH4.O, CO2)
+
+write.csv(OTICE_gas_data, file = "OTICE_gas_data.csv", row.names = FALSE)
+
 #FDP(raw_path="D:/Data Analysis/Gas_data/Raw_data/FTIR_raw/2023-07-08_FTIR.TXT", clean_path="D:/Data Analysis/Gas_data/Clean_data/FTIR_clean")
 FTIR_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/FTIR_clean/20230830_FDP.CSV") #check today's date
 
