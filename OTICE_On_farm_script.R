@@ -83,9 +83,10 @@ OTICE_SEP_1 <- OTICE_data %>%
     NH3 = mean(NH3),
     CO2 = mean(CO2))
 
+
 OTICE_SEP_2 <- OTICE_data %>% 
-  filter(Date.time >= as.POSIXct("2023-09-20 12:00:00", format = "%Y-%m-%d %H:%M:%S"),
-         Date.time <= as.POSIXct("2023-09-26 00:00:00", format = "%Y-%m-%d %H:%M:%S")) %>%
+  filter(Date.time >= as.POSIXct("2023-09-25 12:00:00", format = "%Y-%m-%d %H:%M:%S"),
+         Date.time <= as.POSIXct("2023-10-01 00:00:00", format = "%Y-%m-%d %H:%M:%S")) %>%
   na.omit() %>%
   group_by(Sampling.point.O, Date.time = floor_date(Date.time, unit = "minute")) %>%
   summarise(
