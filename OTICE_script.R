@@ -18,8 +18,8 @@ library(data.table)
 
 
 ########### DATA IMPORTING ###############
-#source("D:/Data Analysis/GCDP/GCDP_function_script.R")
-#source("https://raw.githubusercontent.com/harshest-human/GCDP/main/GCDP_function_script.R")
+source("D:/Data Analysis/GCDP/GCDP_function_script.R")
+source("https://raw.githubusercontent.com/harshest-human/GCDP/main/GCDP_function_script.R")
 
 #ODP(raw_path="D:/Data Analysis/Gas_data/Raw_data/OTICE_raw", clean_path="D:/Data Analysis/Gas_data/Clean_data/OTICE_clean")
 OTICE_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/OTICE_clean/20230830_ODP.CSV") #check today's date

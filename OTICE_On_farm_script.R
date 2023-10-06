@@ -151,6 +151,58 @@ CH4_plot_SEP_2 <- ggplot(OTICE_SEP_2, aes(x = Date.time)) +
   scale_x_datetime(breaks = "12 hours", date_labels = "%Y-%m-%d %H:%M")
 
 
+########### CO2 VIZ #######
+CO2_plot_AUG_1 <- ggplot(OTICE_AUG_1, aes(x = Date.time)) +
+  geom_line(aes(y = CO2, color = Sampling.point.O), size = 1) +
+  labs(x = "Date and Time",
+       y = "CO2 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("On-farm measured values") +
+  scale_x_datetime(breaks = "12 hours", date_labels = "%Y-%m-%d %H:%M")
+
+CO2_plot_AUG_2 <- ggplot(OTICE_AUG_2, aes(x = Date.time)) +
+  geom_line(aes(y = CO2, color = Sampling.point.O), size = 1) +
+  labs(x = "Date and Time",
+       y = "CO2 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("On-farm measured values") +
+  scale_x_datetime(breaks = "12 hours", date_labels = "%Y-%m-%d %H:%M")
+
+CO2_plot_AUG_3 <- ggplot(OTICE_AUG_3, aes(x = Date.time)) +
+  geom_line(aes(y = CO2, color = Sampling.point.O), size = 1) +
+  labs(x = "Date and Time",
+       y = "CO2 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("On-farm measured values") +
+  scale_x_datetime(breaks = "12 hours", date_labels = "%Y-%m-%d %H:%M")
+
+
+CO2_plot_SEP_1 <- ggplot(OTICE_SEP_1, aes(x = Date.time)) +
+  geom_line(aes(y = CO2, color = Sampling.point.O), size = 1) +
+  labs(x = "Date and Time",
+       y = "CO2 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("On-farm measured values") +
+  scale_x_datetime(breaks = "12 hours", date_labels = "%Y-%m-%d %H:%M")
+
+CO2_plot_SEP_2 <- ggplot(OTICE_SEP_2, aes(x = Date.time)) +
+  geom_line(aes(y = CO2, color = Sampling.point.O), size = 1) +
+  labs(x = "Date and Time",
+       y = "CO2 PPM",
+       color = "Sensor Nodes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("On-farm measured values") +
+  scale_x_datetime(breaks = "12 hours", date_labels = "%Y-%m-%d %H:%M")
+
 ########### NH3 VIZ ###############
 NH3_plot_AUG_1 <- ggplot(OTICE_AUG_1, aes(x = Date.time)) +
   geom_line(aes(y = NH3.O, color = Sampling.point.O), size = 1) +
@@ -205,6 +257,12 @@ NH3_plot_SEP_2 <- ggplot(OTICE_SEP_2, aes(x = Date.time)) +
 
 
 ###### View plots ######
+CO2_plot_AUG_1
+CO2_plot_AUG_2
+CO2_plot_AUG_3
+CO2_plot_SEP_1
+CO2_plot_SEP_2
+
 CH4_plot_AUG_1
 CH4_plot_AUG_2
 CH4_plot_AUG_3
@@ -226,6 +284,7 @@ pdf(output_file, width = 8, height = 5)
 
 # List of plots
 plots <- list(
+  CO2_plot_AUG_1, CO2_plot_AUG_2, CO2_plot_AUG_3, CO2_plot_SEP_1, CO2_plot_SEP_2,
   CH4_plot_AUG_1, CH4_plot_AUG_2, CH4_plot_AUG_3, CH4_plot_SEP_1, CH4_plot_SEP_2,
   NH3_plot_AUG_1, NH3_plot_AUG_2, NH3_plot_AUG_3, NH3_plot_SEP_1, NH3_plot_SEP_2
 )
