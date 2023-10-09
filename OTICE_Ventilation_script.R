@@ -338,3 +338,26 @@ GLM_NH3.3 <- summary(glm(NH3.x~Puls.counter.9, data=Vent_3_comb))
 GLM_NH3.4 <- summary(glm(NH3.x~Puls.counter.10, data=Vent_4_comb))
 GLM_NH3.5 <- summary(glm(NH3~Puls.counter.11, data=Vent_5_comb))
 
+
+######## Table of AIC and pvalues
+
+# Create a data frame with the results for each gas
+GLM_results <- data.frame(
+  Gas = rep(c("CO2", "CH4", "NH3"), each = 5),
+  Ventilator = rep(1:5, times = 3),
+  AIC = c(-218.1, 1454.5, -703.36, -788.36, -700.37,
+          24.88, 291.67, -718.52, -671.2, -788.36,
+          -136.7, 179.77, -671.2, -788.36, -700.37),
+  p_value = c("<2e-16", "<2e-16", "<2e-16", "<2e-16", "<2e-16",
+              "<2e-16", "<2e-16", "0.373", "0.116", "0.373",
+              "<2e-16", "<2e-16", "0.373", "0.116", "2.43e-15")
+)
+
+# Pivot the data for better presentation
+GLM_results <- GLM_results %>%
+  pivot_wider(names_from = Gas, values_from = c(AIC, p_value))
+
+# Save the table as a CSV file
+write.csv(GLM_results, "GLM_results.csv", row.names = FALSE)
+
+
