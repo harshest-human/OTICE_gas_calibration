@@ -310,3 +310,31 @@ for (plot in plots) {
 dev.off()
 
 
+
+
+####### Generalized Linear Regression modelling #####
+
+#CO2
+#Regression  effect: Ventilation rate  
+GLM_CO2.1 <- summary(glm(CO2.x~Puls.counter.7, data=Vent_1_comb))
+GLM_CO2.2 <- summary(glm(CO2.x~Puls.counter.8, data=Vent_2_comb))
+GLM_CO2.3 <- summary(glm(CO2.x~Puls.counter.9, data=Vent_3_comb))
+GLM_CO2.4 <- summary(glm(CO2.x~Puls.counter.10, data=Vent_4_comb))
+GLM_CO2.5 <- summary(glm(CO2~Puls.counter.11, data=Vent_5_comb))
+
+#CH4
+#Regression  effect: Ventilation rate  
+GLM_CH4.1 <- summary(glm(CH4.x~Puls.counter.7, data=Vent_1_comb))
+GLM_CH4.2 <- summary(glm(CH4.x~Puls.counter.8, data=Vent_2_comb))
+GLM_CH4.3 <- summary(glm(CH4.x~Puls.counter.9, data=Vent_3_comb))
+GLM_CH4.4 <- summary(glm(CH4.x~Puls.counter.10, data=Vent_4_comb))
+GLM_CH4.5 <- summary(glm(CH4~Puls.counter.11, data=Vent_5_comb))
+
+#NH3
+#Regression  effect: Ventilation rate  
+GLM_NH3.1 <- summary(glm(NH3.x~Puls.counter.7, data=Vent_1_comb))
+GLM_NH3.2 <- summary(glm(NH3.x~Puls.counter.8, data=Vent_2_comb))
+GLM_NH3.3 <- summary(glm(NH3.x~Puls.counter.9, data=Vent_3_comb))
+GLM_NH3.4 <- summary(glm(NH3.x~Puls.counter.10, data=Vent_4_comb))
+GLM_NH3.5 <- summary(glm(NH3~Puls.counter.11, data=Vent_5_comb))
+
