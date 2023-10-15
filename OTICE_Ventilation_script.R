@@ -44,39 +44,39 @@ OTICE_OCT <- OTICE_data %>%
 # Create separate OTICE_OCT frames for each OTICE sensor nodes
 Node_178Q <- OTICE_OCT %>%
   filter(Sampling.point.O == '178Q') %>%
-  select(Date.time, NH3, CO2, CH4)
+  select(Date.time, NH3.O, CO2, CH4.O)
 
 Node_1791 <- OTICE_OCT %>%
   filter(Sampling.point.O == '1791') %>%
-  select(Date.time, NH3, CO2, CH4)
+  select(Date.time, NH3.O, CO2, CH4.O)
 
 Node_178X <- OTICE_OCT %>%
   filter(Sampling.point.O == '178X') %>%
-  select(Date.time, NH3, CO2, CH4)
+  select(Date.time, NH3.O, CO2, CH4.O)
 
 Node_178T <- OTICE_OCT %>%
   filter(Sampling.point.O == '178T') %>%
-  select(Date.time, NH3, CO2, CH4)
+  select(Date.time, NH3.O, CO2, CH4.O)
 
 Node_178F <- OTICE_OCT %>%
   filter(Sampling.point.O == '178F') %>%
-  select(Date.time, NH3, CO2, CH4)
+  select(Date.time, NH3.O, CO2, CH4.O)
 
 Node_178S <- OTICE_OCT %>%
   filter(Sampling.point.O == '178S') %>%
-  select(Date.time, NH3, CO2, CH4)
+  select(Date.time, NH3.O, CO2, CH4.O)
 
 Node_1792 <- OTICE_OCT %>%
   filter(Sampling.point.O == '1792') %>%
-  select(Date.time, NH3, CO2, CH4)
+  select(Date.time, NH3.O, CO2, CH4.O)
 
 Node_178V <- OTICE_OCT %>%
   filter(Sampling.point.O == '178V') %>%
-  select(Date.time, NH3, CO2, CH4)
+  select(Date.time, NH3.O, CO2, CH4.O)
 
 Node_178P <- OTICE_OCT %>%
   filter(Sampling.point.O == '178P') %>%
-  select(Date.time, NH3, CO2, CH4)
+  select(Date.time, NH3.O, CO2, CH4.O)
 
 
 ########### VENTILATION DATA ###############
@@ -211,38 +211,38 @@ CO2plot_Vent_5 <- ggplot(Vent_5_comb, aes(x = Puls.counter.11, y = CO2)) +
 ######## CH4 DATA VIZ ########
 # For Vent_1_comb
 CH4plot_Vent_1 <- ggplot(Vent_1_comb, aes(x = Puls.counter.7)) +
-  geom_line(aes(y = CH4.x, color = "CH4.x")) +
-  geom_line(aes(y = CH4.y, color = "CH4.y")) +
+  geom_line(aes(y = CH4.O.x, color = "CH4.x")) +
+  geom_line(aes(y = CH4.O.y, color = "CH4.y")) +
   scale_color_manual(values = c("CH4.x" = "brown", "CH4.y" = "orange3")) +
   labs(x = "Ventilation rate (%)", y = "CH4") +
   ggtitle("CH4 trends measured by 178S and 178Q at Ventilator:1")
 
 # For Vent_2_comb
 CH4plot_Vent_2 <- ggplot(Vent_2_comb, aes(x = Puls.counter.8)) +
-  geom_line(aes(y = CH4.x, color = "CH4.x")) +
-  geom_line(aes(y = CH4.y, color = "CH4.y")) +
+  geom_line(aes(y = CH4.O.x, color = "CH4.x")) +
+  geom_line(aes(y = CH4.O.y, color = "CH4.y")) +
   scale_color_manual(values = c("CH4.x" = "brown", "CH4.y" = "orange3")) +
   labs(x = "Ventilation rate (%)", y = "CH4") +
   ggtitle("CH4 trends measured by 178X and 178T at Ventilator:2")
 
 # For Vent_3_comb
 CH4plot_Vent_3 <- ggplot(Vent_3_comb, aes(x = Puls.counter.9)) +
-  geom_line(aes(y = CH4.x, color = "CH4.x")) +
-  geom_line(aes(y = CH4.y, color = "CH4.y")) +
+  geom_line(aes(y = CH4.O.x, color = "CH4.x")) +
+  geom_line(aes(y = CH4.O.y, color = "CH4.y")) +
   scale_color_manual(values = c("CH4.x" = "brown", "CH4.y" = "orange3")) +
   labs(x = "Ventilation rate (%)", y = "CH4") +
   ggtitle("CH4 trends measured by 1791 and 1792 at Ventilator:3")
 
 # For Vent_4_comb
 CH4plot_Vent_4 <- ggplot(Vent_4_comb, aes(x = Puls.counter.10)) +
-  geom_line(aes(y = CH4.x, color = "CH4.x")) +
-  geom_line(aes(y = CH4.y, color = "CH4.y")) +
+  geom_line(aes(y = CH4.O.x, color = "CH4.x")) +
+  geom_line(aes(y = CH4.O.y, color = "CH4.y")) +
   scale_color_manual(values = c("CH4.x" = "brown", "CH4.y" = "orange3")) +
   labs(x = "Ventilation rate (%)", y = "CH4") +
   ggtitle("CH4 trends measured by 178V and 178F at Ventilator:4")
 
 # For Vent_5_comb
-CH4plot_Vent_5 <- ggplot(Vent_5_comb, aes(x = Puls.counter.11, y = CH4)) +
+CH4plot_Vent_5 <- ggplot(Vent_5_comb, aes(x = Puls.counter.11, y = CH4.O)) +
   geom_line(color = "brown") +
   labs(x = "Ventilation rate (%)", y = "CH4") +
   ggtitle("CH4 trend measured by 178P at Ventilator:5")
@@ -251,38 +251,38 @@ CH4plot_Vent_5 <- ggplot(Vent_5_comb, aes(x = Puls.counter.11, y = CH4)) +
 ######## NH3 DATA VIZ ########
 # For Vent_1_comb
 NH3plot_Vent_1 <- ggplot(Vent_1_comb, aes(x = Puls.counter.7)) +
-  geom_line(aes(y = NH3.x, color = "NH3.x")) +
-  geom_line(aes(y = NH3.y, color = "NH3.y")) +
+  geom_line(aes(y = NH3.O.x, color = "NH3.x")) +
+  geom_line(aes(y = NH3.O.y, color = "NH3.y")) +
   scale_color_manual(values = c("NH3.x" = "darkgreen", "NH3.y" = "green2")) +
   labs(x = "Ventilation rate (%)", y = "NH3") +
   ggtitle("NH3 trends measured by 178S and 178Q at Ventilator:1")
 
 # For Vent_2_comb
 NH3plot_Vent_2 <- ggplot(Vent_2_comb, aes(x = Puls.counter.8)) +
-  geom_line(aes(y = NH3.x, color = "NH3.x")) +
-  geom_line(aes(y = NH3.y, color = "NH3.y")) +
+  geom_line(aes(y = NH3.O.x, color = "NH3.x")) +
+  geom_line(aes(y = NH3.O.y, color = "NH3.y")) +
   scale_color_manual(values = c("NH3.x" = "darkgreen", "NH3.y" = "green2")) +
   labs(x = "Ventilation rate (%)", y = "NH3") +
   ggtitle("NH3 trends measured by 178X and 178T at Ventilator:2")
 
 # For Vent_3_comb
 NH3plot_Vent_3 <- ggplot(Vent_3_comb, aes(x = Puls.counter.9)) +
-  geom_line(aes(y = NH3.x, color = "NH3.x")) +
-  geom_line(aes(y = NH3.y, color = "NH3.y")) +
+  geom_line(aes(y = NH3.O.x, color = "NH3.x")) +
+  geom_line(aes(y = NH3.O.y, color = "NH3.y")) +
   scale_color_manual(values = c("NH3.x" = "darkgreen", "NH3.y" = "green2")) +
   labs(x = "Ventilation rate (%)", y = "NH3") +
   ggtitle("NH3 trends measured by 1791 and 1792 at Ventilator:3")
 
 # For Vent_4_comb
 NH3plot_Vent_4 <- ggplot(Vent_4_comb, aes(x = Puls.counter.10)) +
-  geom_line(aes(y = NH3.x, color = "NH3.x")) +
-  geom_line(aes(y = NH3.y, color = "NH3.y")) +
+  geom_line(aes(y = NH3.O.x, color = "NH3.x")) +
+  geom_line(aes(y = NH3.O.y, color = "NH3.y")) +
   scale_color_manual(values = c("NH3.x" = "darkgreen", "NH3.y" = "green2")) +
   labs(x = "Ventilation rate (%)", y = "NH3") +
   ggtitle("NH3 trends measured by 178V and 178F at Ventilator:4")
 
 # For Vent_5_comb
-NH3plot_Vent_5 <- ggplot(Vent_5_comb, aes(x = Puls.counter.11, y = NH3)) +
+NH3plot_Vent_5 <- ggplot(Vent_5_comb, aes(x = Puls.counter.11, y = NH3.O)) +
   geom_line(color = "darkgreen") +
   labs(x = "Ventilation rate (%)", y = "NH3") +
   ggtitle("NH3 trend measured by 178P at Ventilator:5")
