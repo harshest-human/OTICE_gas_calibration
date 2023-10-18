@@ -64,10 +64,11 @@ CH4_plot1 <- ggplot(merge_1, aes(x = Date.time)) +
   labs(x = "Date and Time",
        y = "CH4 PPM",
        color = "Sensor Nodes") +
-  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR")) +
+  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR"), limits = c(0, NA)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right") +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
+
 
 CH4_plot2 <- ggplot(merge_1, aes(x = Date.time)) +
   geom_line(aes(y = CH4, color = Sampling.point.O), size = 1) +
@@ -77,7 +78,7 @@ CH4_plot2 <- ggplot(merge_1, aes(x = Date.time)) +
   labs(x = "Date and Time",
        y = "CH4 Rs/Ro",
        color = "Sensor Nodes") +
-  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR")) +
+  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR"), limits = c(0, NA)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right") +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
@@ -91,7 +92,7 @@ NH3_plot1 <- ggplot(merge_1, aes(x = Date.time)) +
   labs(x = "Date and Time",
        y = "NH3 PPM",
        color = "Sensor Nodes") +
-  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR")) +
+  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR"), limits = c(0, NA)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right") +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
@@ -105,7 +106,7 @@ NH3_plot2 <- ggplot(merge_1, aes(x = Date.time)) +
   labs(x = "Date and Time",
        y = "NH3 Rs/Ro",
        color = "Sensor Nodes") +
-  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR")) +
+  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR"), limits = c(0, NA)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1),
         legend.position = "right") +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
