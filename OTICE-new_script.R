@@ -57,7 +57,7 @@ merge_1 <- left_join(OTICE_1, FTIR_1, by = c("Date.time" = "Date.time")) %>% na.
 
 
 CH4_plot1 <- ggplot(merge_1, aes(x = Date.time)) +
-  geom_line(aes(y = CH4, color = Sampling.point.O), size = 1) +
+  geom_line(aes(y = CH4.O, color = Sampling.point.O), size = 1) +
   geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
                    breaks = seq(min(merge_1$Date.time), max(merge_1$Date.time), by = "1 hour")) +
@@ -69,8 +69,22 @@ CH4_plot1 <- ggplot(merge_1, aes(x = Date.time)) +
         legend.position = "right") +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
+CH4_plot2 <- ggplot(merge_1, aes(x = Date.time)) +
+  geom_line(aes(y = CH4, color = Sampling.point.O), size = 1) +
+  geom_line(aes(y = CH4.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_1$Date.time), max(merge_1$Date.time), by = "1 hour")) +
+  labs(x = "Date and Time",
+       y = "CH4 Rs/Ro",
+       color = "Sensor Nodes") +
+  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
+
+
 NH3_plot1 <- ggplot(merge_1, aes(x = Date.time)) +
-  geom_line(aes(y = NH3, color = Sampling.point.O), size = 1) +
+  geom_line(aes(y = NH3.O, color = Sampling.point.O), size = 1) +
   geom_line(aes(y = NH3.F, color = "FTIR"), size = 1, color = "black") +
   scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
                    breaks = seq(min(merge_1$Date.time), max(merge_1$Date.time), by = "1 hour")) +
@@ -83,4 +97,25 @@ NH3_plot1 <- ggplot(merge_1, aes(x = Date.time)) +
   ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
 
+NH3_plot2 <- ggplot(merge_1, aes(x = Date.time)) +
+  geom_line(aes(y = NH3, color = Sampling.point.O), size = 1) +
+  geom_line(aes(y = NH3.F, color = "FTIR"), size = 1, color = "black") +
+  scale_x_datetime(date_labels = "%Y-%m-%d %H:%M", 
+                   breaks = seq(min(merge_1$Date.time), max(merge_1$Date.time), by = "1 hour")) +
+  labs(x = "Date and Time",
+       y = "NH3 Rs/Ro",
+       color = "Sensor Nodes") +
+  scale_y_continuous(sec.axis = sec_axis(~ ., name = "FTIR")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "right") +
+  ggtitle("Comparing OTICE nodes with a reference FTIR inside a calibration chamber")
 
+
+###### Save plots as a PDF ######
+
+# Save each plot on a separate page in the PDF
+ggsave("CH4_New_plot1_R.pdf", CH4_plot1, width = 8, height = 5, units = "in")
+ggsave("CH4_New_plot2_R.pdf", CH4_plot2, width = 8, height = 5, units = "in")
+
+ggsave("NH3_New_plot1_R.pdf", NH3_plot1, width = 8, height = 5, units = "in")
+ggsave("NH3_New_plot2_R.pdf", NH3_plot2, width = 8, height = 5, units = "in")
