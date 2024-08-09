@@ -29,6 +29,20 @@ otclean <- function(input_path, output_path, result_file_name) {
   # Concatenate all data frames in the list
   final_data <- bind_rows(data_list)
   
+  # Extract DATE.TIME values from NODE 15
+  node_15_times <- final_data %>%
+    filter(Node == 15) %>%
+    pull(DATE.TIME)
+  
+  # Check if there are DATE.TIME values for NODE 15
+  if (length(node_15_times) > 0) {
+    # Apply the DATE.TIME values from NODE 15 to all nodes
+    final_data <- final_data %>%
+      mutate(DATE.TIME = rep(node_15_times, length.out = n()))
+  } else {
+    warning("No DATE.TIME values found for NODE 15. DATE.TIME alignment not applied.")
+  }
+  
   # Write the concatenated data to a CSV file
   write.csv(final_data, file = file.path(output_path, result_file_name), row.names = FALSE)
 }
@@ -39,3 +53,4 @@ output_path = "D:/Data Analysis/Gas_data/Clean_data/OTICE_clean"
 result_file_name = "20240730_OTICEv3_data.csv"
 
 OTICEv3.data <- otclean(input_path, output_path, result_file_name)
+
