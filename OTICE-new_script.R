@@ -18,8 +18,8 @@ source("D:/Data Analysis/GCDP/GCDP_function_script.R")
 
 
 ########### DATA IMPORTING ###############
-#ODP(raw_path="D:/Data Analysis/Gas_data/Raw_data/OTICE_raw/2023/08", clean_path="D:/Data Analysis/Gas_data/Clean_data/OTICE_clean")
-OTICE_data <- read.csv("D:/Data Analysis/Gas_data/Clean_data/OTICE_clean/20231018_ODP.CSV") #check today's date
+ODP(raw_path="D:/Data Analysis/Gas_data/Raw_data/OTICE_raw/2024", clean_path="D:/Data Analysis/Gas_data/Clean_data/OTICE_clean")
+OTICE_data <- fread("D:/Data Analysis/Gas_data/Clean_data/OTICE_clean/20240918_ODP.CSV") #check today's date
 
 # CONVERT OTICE Rs/Ro values to PPM
 OTICE_data$NH3.O <- 0.5471 * OTICE_data$NH3^(-0.463)
